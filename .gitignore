@@ -2,6 +2,14 @@
 *.apk
 *.ap_
 
+build.gradle
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
+.idea/
+
 # Files for the ART/Dalvik VM
 *.dex
 
