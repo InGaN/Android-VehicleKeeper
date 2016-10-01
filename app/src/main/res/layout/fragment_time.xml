@@ -16,7 +16,7 @@
     <Button
         android:id="@+id/tbx_depart"
         android:layout_below="@id/section_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"/>
 
 </RelativeLayout>
