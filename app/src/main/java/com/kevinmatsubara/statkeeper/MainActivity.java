@@ -146,6 +146,9 @@ public class MainActivity extends FragmentActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private TextView lbl_depart_time;
+        private TextView lbl_arrive_time;
+        private TextView lbl_date_time;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -167,16 +170,80 @@ public class MainActivity extends FragmentActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_time, container, false);
 
-            Button tbx_depart = (Button) rootView.findViewById(R.id.tbx_depart);
-            tbx_depart.setOnClickListener(new View.OnClickListener() {
+            lbl_depart_time = (TextView) rootView.findViewById(R.id.lbl_depart_time);
+            lbl_arrive_time = (TextView) rootView.findViewById(R.id.lbl_arrive_time);
+            lbl_date_time = (TextView) rootView.findViewById(R.id.lbl_date_time);
+
+            Button btn_depart_time = (Button) rootView.findViewById(R.id.btn_depart_time);
+            btn_depart_time.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogFragment newFragment = new TimePickerFragment();
-                    FragmentActivity activity = (FragmentActivity)v.getContext();
+                    DialogFragment newFragment = new TimePickerFragment() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            lbl_depart_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        }
+                    };
+                    FragmentActivity activity = (FragmentActivity) v.getContext();
                     newFragment.show(activity.getSupportFragmentManager(), "timePicker");
                 }
             });
 
+            Button btn_arrive_time = (Button) rootView.findViewById(R.id.btn_arrive_time);
+            btn_arrive_time.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment newFragment = new TimePickerFragment() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            lbl_arrive_time.setText(String.format("%02d:%02d", hourOfDay, minute));
+                        }
+                    };
+                    FragmentActivity activity = (FragmentActivity) v.getContext();
+                    newFragment.show(activity.getSupportFragmentManager(), "timePicker");
+                }
+            });
+
+            Button btn_date_time = (Button) rootView.findViewById(R.id.btn_date_time);
+            btn_date_time.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment newFragment = new DatePickerFragment() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int day) {
+                            lbl_date_time.setText(String.format("%d-%02d-%02d", year, month, day));
+                        }
+                    };
+                    FragmentActivity activity = (FragmentActivity) v.getContext();
+                    newFragment.show(activity.getSupportFragmentManager(), "datePicker");
+
+
+                }
+            });
+
+            return rootView;
+        }
+    }
+
+    public static class FuelFragment extends Fragment {
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public static FuelFragment newInstance(int sectionNumber) {
+            FuelFragment fragment = new FuelFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public FuelFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_fuel, container, false);
             return rootView;
         }
     }
@@ -204,30 +271,6 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-
-    public static class FuelFragment extends Fragment {
-
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public static FuelFragment newInstance(int sectionNumber) {
-            FuelFragment fragment = new FuelFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public FuelFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_fuel, container, false);
-            return rootView;
-        }
-    }
-
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
@@ -244,7 +287,7 @@ public class MainActivity extends FragmentActivity {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
+            Log.d("TEST", "onDateSet " + day);
         }
     }
 
@@ -264,7 +307,7 @@ public class MainActivity extends FragmentActivity {
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            // Do something with the time chosen by the user
+            Log.d("TEST", "onTimeSet " + hourOfDay);
         }
     }
 }

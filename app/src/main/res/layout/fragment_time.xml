@@ -9,14 +9,72 @@
     tools:context=".MainActivity$TimeFragment">
 
     <TextView
-        android:id="@+id/section_label"
-        android:text="Time"
+        android:id="@+id/lbl_depart_time"
+        android:text="00:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/lbl_arrive_time"
+        android:layout_below="@id/lbl_depart_time"
+        android:text="00:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/lbl_date_time"
+        android:layout_below="@id/lbl_arrive_time"
+        android:text="---"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lbl_depart"
+        android:layout_below="@id/lbl_date_time"
+        android:text="Departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/tbx_depart"
-        android:layout_below="@id/section_label"
+        android:id="@+id/btn_depart_time"
+        android:layout_below="@id/lbl_depart"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent"/>
-
+        android:layout_width="wrap_content"/>
+    <Button
+        android:id="@+id/btn_depart_instant"
+        android:layout_below="@id/lbl_depart"
+        android:layout_toRightOf="@id/btn_depart_time"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <TextView
+        android:id="@+id/lbl_arrive"
+        android:layout_below="@id/btn_depart_time"
+        android:text="Arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_arrive_time"
+        android:layout_below="@id/lbl_arrive"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <Button
+        android:id="@+id/btn_arrive_instant"
+        android:layout_below="@id/lbl_arrive"
+        android:layout_toRightOf="@id/btn_arrive_time"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <TextView
+        android:id="@+id/lbl_date"
+        android:layout_below="@id/btn_arrive_time"
+        android:text="Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_date_time"
+        android:layout_below="@id/lbl_date"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <Button
+        android:id="@+id/btn_date_instant"
+        android:layout_below="@id/lbl_date"
+        android:layout_toRightOf="@id/btn_date_time"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
 </RelativeLayout>
